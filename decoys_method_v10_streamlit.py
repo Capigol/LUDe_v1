@@ -87,8 +87,8 @@ text = '''
  #        """)
 
 from PIL import Image
-image = Image.open(r'C:\Users\Lucas\Desktop\PAPER CLUSTERING\Scripts\workflow_lude.png')
-st.image(image, caption='Clustering Workflow')
+image = Image.open('workflow_lude.png')
+st.image(image, caption='LUDe Workflow')
 
 st.markdown(text)
 
