@@ -237,7 +237,7 @@ def decoy_fase1(loaded_smiles):
             base_de_datos = open("databases/" + base_de_datos, "r") #abro la base de datos para comparar
             for linea_DB in base_de_datos:      # le digo que repita las siguientes acciones para cada molecula en la base de datos
                 linea1_DB = linea_DB.strip()
-                linea2_DB = linea1_DB.split(",") 
+                linea2_DB = linea1_DB.split("\t") 
                 name=linea2_DB[0]
                 smiles_DB = linea2_DB[1]
                 framework_DB = linea2_DB[2]
