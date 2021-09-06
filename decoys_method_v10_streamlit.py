@@ -232,9 +232,9 @@ def decoy_fase1(loaded_smiles):
         fp_activos.append(fp_1)
             
         #BASE DE DATOS
-        base_de_datos_total = os.listdir(r"D:\Lucas_2021\2021\streamlit\LUDe\database")
+        base_de_datos_total = os.listdir(databases)
         for base_de_datos in base_de_datos_total:
-            base_de_datos = open(r"D:\Lucas_2021\2021\streamlit\LUDe\database" + base_de_datos, "r") #abro la base de datos para comparar
+            base_de_datos = open(base_de_datos, "r") #abro la base de datos para comparar
             for linea_DB in base_de_datos:      # le digo que repita las siguientes acciones para cada molecula en la base de datos
                 linea1_DB = linea_DB.strip()
                 linea2_DB = linea1_DB.split(",") 
