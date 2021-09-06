@@ -39,9 +39,14 @@ def img_to_bytes(img_path):
     encoded = base64.b64encode(img_bytes).decode()
     return encoded
 
-header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("cropped-header.png"))
+header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("cropped-header-lude.png"))
 st.markdown(header_html, unsafe_allow_html=True,)
 ######
+
+st.markdown("![Twitter Follow](https://img.shields.io/twitter/follow/LIDeB_UNLP?style=social)")
+st.subheader(":pushpin:" "About Us")
+st.markdown("We are a team from the Laboratory of Bioactive Research and Development (LIDeB) of the National University of La Plata, Argentina. Our research group is focused on rational designing of new drug candidates and drug repurposing for epilepsy and neglected tropical diseases such as Chagas disease, leishmaniasis, malaria.Another important goal of our group is the development and caracterization of nanocarriers. The work developed by our group has resulted in publications in international indexed journals, abstracts, congress and awards in national and international of Medicinal and Computational Chemistry.")
+st.markdown(":computer:""**Web Site** " "<https://lideb.biol.unlp.edu.ar>")
 
 # Start the stopwatch / counter 
 t1_start = process_time() 
@@ -68,6 +73,7 @@ In this Web App, decoys are obtained by three sequential steps:
 
 Finally, you can download a file with your **decoys.**
 
+The next workflow summarizes the steps performed by this method:
 """)
 
 text = '''
@@ -76,9 +82,13 @@ text = '''
 '''
 
 
-st.markdown("""
-         **To cite the application, please reference XXXXXXXXX**
-         """)
+#st.markdown("""
+ #        **To cite the application, please reference XXXXXXXXX**
+ #        """)
+
+from PIL import Image
+image = Image.open(r'C:\Users\Lucas\Desktop\PAPER CLUSTERING\Scripts\workflow_lude.png')
+st.image(image, caption='Clustering Workflow')
 
 st.markdown(text)
 
