@@ -39,8 +39,12 @@ def img_to_bytes(img_path):
     encoded = base64.b64encode(img_bytes).decode()
     return encoded
 
-header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("cropped-header-lude.png"))
-st.markdown(header_html, unsafe_allow_html=True,)
+from PIL import Image
+image = Image.open('cropped-header-lude.png')
+st.image(image, caption='header')
+
+#header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("cropped-header-lude.png"))
+#st.markdown(header_html, unsafe_allow_html=True,)
 ######
 
 st.markdown("![Twitter Follow](https://img.shields.io/twitter/follow/LIDeB_UNLP?style=social)")
@@ -86,7 +90,7 @@ text = '''
  #        **To cite the application, please reference XXXXXXXXX**
  #        """)
 
-from PIL import Image
+
 image = Image.open('workflow_lude.png')
 st.image(image, caption='LUDe Workflow')
 
