@@ -41,7 +41,7 @@ def img_to_bytes(img_path):
 
 from PIL import Image
 image = Image.open('cropped-header-lude.png')
-st.image(image, caption='header')
+#st.image(image, caption='header')
 
 #header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("cropped-header-lude.png"))
 #st.markdown(header_html, unsafe_allow_html=True,)
@@ -68,13 +68,9 @@ st.write("""
 In this Web App, decoys are obtained by three sequential steps:
     
 - Searching molecules with similar physicochemical properties of the loaded molecules in a curated ChEMBL database.
-
 - Filtering the selected molecules by dissimilarity against each individual loaded molecule.
-
 - Randomly selecting a desired number of decoys for each individual loaded molecule.
-
 - Filtering the selected molecules by the dissimilarity against all the loaded molecules.
-
 Finally, you can download a file with your **decoys.**
 
 The next workflow summarizes the steps performed by this method:
