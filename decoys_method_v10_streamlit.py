@@ -41,7 +41,7 @@ def img_to_bytes(img_path):
 
 from PIL import Image
 image = Image.open('cropped-header-lude.png')
-st.image(image, caption=False)
+st.image(image)
 
 #header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("cropped-header-lude.png"))
 #st.markdown(header_html, unsafe_allow_html=True,)
