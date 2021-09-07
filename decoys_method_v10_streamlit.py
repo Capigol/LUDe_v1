@@ -102,7 +102,7 @@ st.sidebar.header('Upload your smiles')
 uploaded_file_1 = st.sidebar.file_uploader("Upload your smiles in a TXT file", type=["txt"])
 
 st.sidebar.markdown("""
-[Example TXT input file](molecules_example.txt)
+[Example TXT input file](example_molecules.txt)
 """)
 
 
