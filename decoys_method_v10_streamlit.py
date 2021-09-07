@@ -443,7 +443,8 @@ if uploaded_file_1 is not None:
         st.balloons()
 
 else:
-    if st.button('Press to use Example Dataset'):
+    if st.button('Press to use Example Smiles'):
+        st.write("Five smiles have been loaded as example")
         loaded_smiles = pd.read_csv("example_molecules.txt",sep="\t",header=None)
         lista_resultados = decoy_fase1(loaded_smiles)
         df = duplicates_filter(lista_resultados[0])
