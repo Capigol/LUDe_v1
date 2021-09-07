@@ -154,7 +154,16 @@ else:
     framework_filter = True
     max_similarity_limit_all = 0.3
     max_decoys = 100
+
     
+    
+st.sidebar.title(":speech_balloon: Contact Us")
+st.sidebar.info(
+"""
+If you are looking to contact us, please
+[:e-mail:](mailto:lideb@biol.unlp.edu.ar) or [Twitter](https://twitter.com/LIDeB_UNLP)
+""")
+
 #---------------------------------#
 # Main panel
 
