@@ -258,7 +258,6 @@ def decoy_fase1(loaded_smiles):
                 linea1_DB = linea_DB.strip()
                 linea2_DB = linea1_DB.split("\t")
                 name=linea2_DB[0]
-                print(name)
                 smiles_DB = linea2_DB[1]
                 framework_DB = linea2_DB[2]
                 MolWt_DB = float(linea2_DB[3])
