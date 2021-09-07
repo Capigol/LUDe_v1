@@ -443,11 +443,24 @@ if uploaded_file_1 is not None:
 
 else:
     st.info('Awaiting for TXT file to be uploaded.')
-    if st.button('Press to use Example smiles'):
-        st.markdown('We have used 5 smiles as example')
-        #st.write("We sorry, we don't have a example file yet ;)")
-        uploaded_file_1 = pd.read_csv("example_molecules.txt",sep="\t",header=None)
-    #     heatmap(df_ok)
+    if st.button('Press to use Example Dataset'):
+        loaded_smiles = pd.read_csv("example_molecules.txt",sep="\t",header=None)
+        lista_resultados = decoy_fase1(loaded_smiles)
+        df = duplicates_filter(lista_resultados[0])
+        st.markdown(":point_down: **Here you can dowload the generated decoys**", unsafe_allow_html=True)
+        st.markdown(filedownload(df), unsafe_allow_html=True)
+        st.markdown(text)
+        st.markdown(":point_down: **Here you can see a little analysis of the process**", unsafe_allow_html=True)
+        st.write(lista_resultados[1])
+        
+        st.markdown(":point_down: **Here you can dowload this table in a csv file**", unsafe_allow_html=True)
+        st.markdown(filedownload1(lista_resultados[1]), unsafe_allow_html=True)
+        st.markdown(text)
+        settings_df = setting_info()
+        st.markdown(":point_down: **Here you can download your settings**", unsafe_allow_html=True)
+        st.markdown(filedownload2(settings_df), unsafe_allow_html=True)
+
+        st.balloons()
 
 
 
