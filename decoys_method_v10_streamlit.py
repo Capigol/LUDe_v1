@@ -200,7 +200,7 @@ def decoy_fase1(loaded_smiles):
     for molecules in my_molecules:
         # Update progress bar.
         t.markdown("Progress: " + str(i+1) +"/" + str(tamanio_total))
-        
+        print(i)
         my_bar.progress(i + 1)
         
         conteo_1 = []               # molecules passing physicochemical filters
@@ -222,7 +222,7 @@ def decoy_fase1(loaded_smiles):
         my_smiles = Chem.MolFromSmiles(estandarizada) # convierte las moleculas a smiles
         core = MurckoScaffold.GetScaffoldForMol(my_smiles) # determino el framework
         framework = Chem.MolToSmiles(core) # guardo el framework en smiles
-        print (i)
+
         #DESCRIPTORES
         MolWt = Descriptors.MolWt(my_smiles) # calculo el peso molecular
         MaxWt_DB = MolWt + lim_MW
