@@ -164,7 +164,6 @@ st.markdown("""
          ** :point_left: On the left you can find the parameters to set**
          """)
 
-st.subheader(':point_down: Click RUN to generate decoys')
 
    
  
@@ -421,6 +420,7 @@ def setting_info():
 # ---------------------------------#
 
 if uploaded_file_1 is not None:
+    st.subheader(':point_down: Click RUN to generate decoys')
     run = st.button("RUN")
     if run == True:
         loaded_smiles = pd.read_csv(uploaded_file_1,sep="\t",header=None)
@@ -442,7 +442,6 @@ if uploaded_file_1 is not None:
         st.balloons()
 
 else:
-    st.info('Awaiting for TXT file to be uploaded.')
     if st.button('Press to use Example Dataset'):
         loaded_smiles = pd.read_csv("example_molecules.txt",sep="\t",header=None)
         lista_resultados = decoy_fase1(loaded_smiles)
@@ -461,7 +460,8 @@ else:
         st.markdown(filedownload2(settings_df), unsafe_allow_html=True)
 
         st.balloons()
-
+    else:
+        st.info('Awaiting for TXT file to be uploaded.')
 
 
 
