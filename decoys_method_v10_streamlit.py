@@ -446,7 +446,7 @@ else:
     if st.button('Press to use Example smiles'):
         st.markdown('We have used 5 smiles as example')
         #st.write("We sorry, we don't have a example file yet ;)")
-        uploaded_file_1 = pd.read_csv(example_molecules.txt,sep="\t",header=None)
+        uploaded_file_1 = pd.read_csv("example_molecules.txt",sep="\t",header=None)
     #     heatmap(df_ok)
 
 
