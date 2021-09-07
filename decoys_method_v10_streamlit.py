@@ -443,9 +443,10 @@ if uploaded_file_1 is not None:
 
 else:
     st.info('Awaiting for TXT file to be uploaded.')
-    if st.button('Press to use Example Dataset'):
-    #     st.markdown('The **Diabetes** dataset is used as the example.')
-        st.write("We sorry, we don't have a example file yet ;)")
+    if st.button('Press to use Example smiles'):
+        st.markdown('We have used 5 smiles as example')
+        #st.write("We sorry, we don't have a example file yet ;)")
+        uploaded_file_1 = pd.read_csv(example_molecules.txt,sep="\t",header=None)
     #     heatmap(df_ok)
 
 
