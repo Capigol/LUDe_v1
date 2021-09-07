@@ -102,8 +102,9 @@ st.sidebar.header('Upload your smiles')
 uploaded_file_1 = st.sidebar.file_uploader("Upload your smiles in a TXT file", type=["txt"])
 
 st.sidebar.markdown("""
-[Example TXT input file](moleculew.txt)
+[Example TXT input file](molecules_example.txt)
 """)
+
 
 lude_setting = st.sidebar.checkbox('Check to change the default configuration', value=False)
 if lude_setting == True:
