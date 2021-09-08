@@ -97,9 +97,9 @@ st.markdown(text)
 
 #---------------------------------#
 # Sidebar - Collects user input features into dataframe
-st.sidebar.header('Upload your smiles')
+st.sidebar.header('Upload your SMILES')
 
-uploaded_file_1 = st.sidebar.file_uploader("Upload your smiles in a TXT file", type=["txt"])
+uploaded_file_1 = st.sidebar.file_uploader("Upload a TXT file with one SMILES per line", type=["txt"])
 
 st.sidebar.markdown("""
 [Example TXT input file](https://raw.githubusercontent.com/Capigol/LUDe_v1/main/example_molecules.txt)
@@ -213,9 +213,9 @@ def decoy_fase1(loaded_smiles):
         try:
             estandarizada = standardize_smiles(molecula_ok)
         except:
-            st.markdown("**Oh no! There is a problem with standarization of one smiles.** :confused:")
+            st.markdown("**Oh no! There is a problem with standarization of one SMILES.** :confused:")
             st.markdown("**Please check your molecule: **" + str(i+1))
-            st.markdown("**That is the smiles: **" + str(molecula_ok))
+            st.markdown("**That is the SMILES: **" + str(molecula_ok))
             st.stop()
         i = i + 1
         nombre= "Query_" + str(i)
@@ -451,8 +451,8 @@ if uploaded_file_1 is not None:
         st.balloons()
 
 else:
-    if st.button('Press to use Example Smiles'):
-        st.write("Five smiles have been loaded as example")
+    if st.button('Press to use Example SMILES'):
+        st.write("Five SMILES have been loaded as example")
         loaded_smiles = pd.read_csv("example_molecules.txt",sep="\t",header=None)
         lista_resultados = decoy_fase1(loaded_smiles)
         df = duplicates_filter(lista_resultados[0])
