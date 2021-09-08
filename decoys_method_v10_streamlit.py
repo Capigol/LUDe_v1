@@ -43,13 +43,10 @@ from PIL import Image
 image = Image.open('cropped-header-lude.png')
 st.image(image)
 
-#header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("cropped-header-lude.png"))
-#st.markdown(header_html, unsafe_allow_html=True,)
-######
 
 st.markdown("![Twitter Follow](https://img.shields.io/twitter/follow/LIDeB_UNLP?style=social)")
 st.subheader(":pushpin:" "About Us")
-st.markdown("We are a team interested to develop new tools cheminformatics for using in areas of computer-assisted drug design and machine learning in drug discovery. We belong to Laboratory of Bioactive Research and Development (LIDeB) of the National University of La Plata, Argentina. Our research group is focused on rational designing of new drug candidates and drug repurposing for epilepsy and neglected tropical diseases such as Chagas disease, leishmaniasis, malaria.Another important goal of our group is the development and caracterization of nanocarriers. The work developed by our group has resulted in publications in international indexed journals, abstracts, congress and awards in national and international of Medicinal and Computational Chemistry.")
+st.markdown("We are a drug discovery team with an interest in the development of publicly available open-source customizable cheminformatics tools to be used in computer-assisted drug discovery. We belong to the Laboratory of Bioactive Research and Development (LIDeB) of the National University of La Plata (UNLP), Argentina. Our research group is focused on computer-guided drug repurposing and rational discovery of new drug candidates to treat epilepsy and neglected tropical diseases.")
 st.markdown(":computer:""**Web Site** " "<https://lideb.biol.unlp.edu.ar>")
 
 # Start the stopwatch / counter 
@@ -58,14 +55,17 @@ t1_start = process_time()
 
 #---------------------------------#
 st.write("""
-# LIDeB Tools - DECOYS WEB APP
+# LIDeB Tools - LUDe
 
-**WebApp to generate decoys from a set of active compounds**
+LUDe (LIDEB’s Useful Decoys) is WebApp that generates, from a set of active compounds, decoys (putative inactive compounds)
+which can be used to retrospectively validate virtual screening tool/protocols. Decoys are molecules that have not been tested
+against a molecular target of interest but due to their structural features are presumably not prone to bind the target with high affinity.
+LUDe finds decoys in a curated ChEMBL27 database which are paired with the known active compounds in relation to certain general
+physicochemical properties (e.g., molecular weight, log P, and others) but which are topologically different from the query compounds.
+LUDe is conceptually similar to the Directory of Useful Decoys enhanced, but additional filters have been serially implemented
+to assure the topological dissimilarity between the decoys and the active compounds.
 
-**Decoys are molecules that have not been tested against a molecular target but due to its structural features it should not bind to the target.**
- They are very usefull for validation of machine learning models.
-
-In this Web App, decoys are obtained by three sequential steps:
+In this Web App, decoys are obtained by four sequential steps:
     
 - Searching molecules with similar physicochemical properties of the loaded molecules in a curated ChEMBL database.
 - Filtering the selected molecules by dissimilarity against each individual loaded molecule.
