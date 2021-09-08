@@ -28,4 +28,4 @@ In this WebApp, decoys are obtained by four sequential steps:
 3) Randomly selecting a desired number of decoys for each individual loaded molecule.
 4) Filtering the selected molecules by the dissimilarity against all the loaded molecules. Finally, you can download a file with your decoys.
 
-If you are looking to contact us, please send a mail to lideb@biol.unlp.edu.ar or contact us by Twitter (@LIDeB_UNLP)
+If you are looking to contact us, please send a mail to lideb@biol.unlp.edu.ar or contact us by Twitter (https://twitter.com/LIDeB_UNLP)
