@@ -8,9 +8,10 @@ of new drug candidates to treat epilepsy and neglected tropical diseases.
 💻Web Site https://lideb.biol.unlp.edu.ar
 
 
-###################
-#####  LUDe  ######
-###################
+
+-------------------------------------------------------------------------------------------------
+
+**LUDe WebApp**
 
 LUDe (LIDEB’s Useful Decoys) is WebApp that generates, from a set of active compounds, decoys (putative inactive compounds)
 which can be used to retrospectively validate virtual screening tool/protocols. Decoys are molecules that have not been tested
