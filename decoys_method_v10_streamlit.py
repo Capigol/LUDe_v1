@@ -179,7 +179,7 @@ st.markdown("""
 
 def decoy_fase1(loaded_smiles):
         
-    import gc # 
+    #import gc
     my_molecules = loaded_smiles[0].tolist()
     
     my_bar = st.progress(0)
@@ -308,7 +308,7 @@ def decoy_fase1(loaded_smiles):
         analisis.append(OK)
         smiles_x_activo_final.append(smiles_by_active)
         fp_seleccionados_x_activo_final.append(fp_seleccionados_por_activo)
-        gc.collect()
+        #gc.collect()
     OK1 = pd.DataFrame(analisis)
     OK2= OK1.rename(columns={0:"Query",1:"selected by physicochemical properties",2:"pass the Tc filter",3:"pass the fMCS filter",4:"Obtained decoys"})
     resultado_fase_1 = [conteo_final, smiles_x_activo_final,fp_activos, fp_seleccionados_x_activo_final]
