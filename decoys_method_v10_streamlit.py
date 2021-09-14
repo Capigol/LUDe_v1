@@ -433,6 +433,7 @@ if uploaded_file_1 is not None:
     if run == True:
         loaded_smiles = pd.read_csv(uploaded_file_1,sep="\t",header=None)
         lista_resultados = decoy_fase1(loaded_smiles)
+        st.write("Now, we are comparing all decoys vs all input SMILES, please wait a moment...")
         df = duplicates_filter(lista_resultados[0])
         st.markdown(":point_down: **Here you can dowload the generated decoys**", unsafe_allow_html=True)
         st.markdown(filedownload(df), unsafe_allow_html=True)
@@ -454,6 +455,7 @@ else:
         st.write("Five SMILES have been loaded as example")
         loaded_smiles = pd.read_csv("example_molecules.txt",sep="\t",header=None)
         lista_resultados = decoy_fase1(loaded_smiles)
+        st.write("Now, we are comparing all decoys vs all input SMILES, please wait a moment...")
         df = duplicates_filter(lista_resultados[0])
         st.markdown(":point_down: **Here you can dowload the generated decoys**", unsafe_allow_html=True)
         st.markdown(filedownload(df), unsafe_allow_html=True)
