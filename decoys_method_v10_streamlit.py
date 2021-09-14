@@ -437,7 +437,7 @@ if uploaded_file_1 is not None:
         lista_resultados = decoy_fase1(loaded_smiles)
         st.write("Now, we are comparing all decoys vs all input SMILES, please wait a moment...")
         df = duplicates_filter(lista_resultados[0])   
-        st.write(f'La primera etapa tardó {round(time.time()-time_start)} segundos')
+        st.write(f'The whole process took around {round(time.time()-time_start)} seconds')
 
         st.markdown(":point_down: **Here you can dowload the generated decoys**", unsafe_allow_html=True)
         st.markdown(filedownload(df), unsafe_allow_html=True)
