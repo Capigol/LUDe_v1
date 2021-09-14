@@ -249,12 +249,10 @@ def decoy_fase1(loaded_smiles):
         # FINGERPRINT
         fp_1 = AllChem.GetMorganFingerprintAsBitVect(my_smiles,fingerprint_radio,nBits = fingerprint_lenght,useFeatures=False)
         fp_activos.append(fp_1)
-            
+        
         #BASE DE DATOS        
         for base_de_datos in base_de_datos_total:
             base_de_datos = pd.read_csv("databases/" + base_de_datos, sep="\t",index_col=False, header=None) #abro la base de datos para comparar
-            st.write(len(base_de_datos))
-            #st.write(base_de_datos.head())
             #BASE DE DATOS
             base_de_datos_1 = base_de_datos[
                 pd.to_numeric((MinWt_DB <= base_de_datos[3]) & (base_de_datos[3] <= MaxWt_DB)) &
@@ -263,9 +261,8 @@ def decoy_fase1(loaded_smiles):
                 pd.to_numeric((MinNumHAcceptors_DB <= base_de_datos[6]) & (base_de_datos[6]<= MaxNumHAcceptors_DB)) &
                 pd.to_numeric((MinNumHDonors_DB <= base_de_datos[7]) &  (base_de_datos[7]<= MaxNumHDonors_DB))]
             
-            if len(base_de_datos_1) >= 1000:
-                base_de_datos_1 = base_de_datos_1.sample(1000, replace=False, random_state=1)
-            print(len(base_de_datos_1))
+            if len(base_de_datos_1) >= 100:
+                base_de_datos_1 = base_de_datos_1.sample(100, replace=False, random_state=1)
         
             base_de_datos_1['mol'] = base_de_datos_1[1].apply(lambda x: Chem.MolFromSmiles(x))    
            
@@ -307,7 +304,7 @@ def decoy_fase1(loaded_smiles):
             del base_de_datos
          
         # base_de_datos.close()
-        OK = [str(nombre), str(len(conteo_1)),str(len(filtro_tanimoto)),str(len(filtro_MCS)),str(len(filtro_fw))]
+        OK = [str(nombre), str(sum(conteo_1)),str(len(filtro_tanimoto)),str(len(filtro_MCS)),str(len(filtro_fw))]
         analisis.append(OK)
         smiles_x_activo_final.append(smiles_by_active)
         fp_seleccionados_x_activo_final.append(fp_seleccionados_por_activo)
