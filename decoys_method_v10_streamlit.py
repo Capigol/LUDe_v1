@@ -316,7 +316,7 @@ def decoy_fase1(loaded_smiles):
     st.success('Decoys have been successfully obtained for each loaded molecule!!! ')
 
     # st.write("---------------------------------------------------------------")
-    st.write("Molecules that passed the physicochemical properties filters: " + str(len(conteo_final)))
+    st.write("Molecules that passed the physicochemical properties filters: " + str(sum(conteo_final)))
     st.write("Molecules that passed the dissimilarity (structural) filters: " + str(len(smiles_seleccionados)))
     st.write("Of which: " + str(len(set(smiles_seleccionados))) + " are different")
     # st.write("if there is enough number of decoys by loaded molecule, " + str(max_decoys) +" have been randombly selected by each loaded molecule")
