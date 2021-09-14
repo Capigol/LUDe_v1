@@ -178,6 +178,7 @@ st.markdown("""
 #%%
 
 def decoy_fase1(loaded_smiles):
+        
     import gc # 
     my_molecules = loaded_smiles[0].tolist()
     
@@ -194,7 +195,8 @@ def decoy_fase1(loaded_smiles):
     fp_seleccionados = []
     smiles_x_activo_final=[]
     fp_seleccionados_x_activo_final = []
-    
+    base_de_datos_total = os.listdir("databases")
+
     for molecules in my_molecules:
         # Update progress bar.
         t.markdown("Progress: " + str(i+1) +"/" + str(tamanio_total))
@@ -248,65 +250,65 @@ def decoy_fase1(loaded_smiles):
         fp_1 = AllChem.GetMorganFingerprintAsBitVect(my_smiles,fingerprint_radio,nBits = fingerprint_lenght,useFeatures=False)
         fp_activos.append(fp_1)
             
-        #BASE DE DATOS
-        base_de_datos_total = os.listdir("databases")
+        #BASE DE DATOS        
         for base_de_datos in base_de_datos_total:
-            base_de_datos = open("databases/" + base_de_datos, "r") #abro la base de datos para comparar
-            for linea_DB in base_de_datos:      # le digo que repita las siguientes acciones para cada molecula en la base de datos
-                linea1_DB = linea_DB.strip()
-                linea2_DB = linea1_DB.split("\t")
-                name=linea2_DB[0]
-                smiles_DB = linea2_DB[1]
-                framework_DB = linea2_DB[2]
-                MolWt_DB = float(linea2_DB[3])
-                MolLogP_DB = float(linea2_DB[4])
-                NumRotatableBonds_DB = float(linea2_DB[5])
-                NumHAcceptors_DB = float(linea2_DB[6])
-                NumHDonors_DB = float(linea2_DB[7])
-                # Physicochemical filters
-                if MinWt_DB <= MolWt_DB <= MaxWt_DB:
-                    if MinMolLogP_DB <= MolLogP_DB <= MaxMolLogP_DB:
-                        if MinNumRotatableBonds_DB <= NumRotatableBonds_DB <= MaxNumRotatableBonds_DB:
-                            if MinNumHAcceptors_DB <= NumHAcceptors_DB <= MaxNumHAcceptors_DB:
-                                if MinNumHDonors_DB <= NumHDonors_DB <= MaxNumHDonors_DB:
-                                    conteo_final.append(name)
-                                    conteo_1.append(name)
-                                    # Dissimilarity conditions                        
-                                    molec_x = Chem.MolFromSmiles(smiles_DB)
-                                    fp_2 = AllChem.GetMorganFingerprintAsBitVect(molec_x,fingerprint_radio,nBits = fingerprint_lenght,useFeatures=False)
-                                    similarity_metric_ok = getattr(DataStructs, similarity_metric)
-                                    tan_sim= similarity_metric_ok(fp_1, fp_2)
-                                    if tan_sim <= float(max_similarity_limit):
-                                        mols = [my_smiles,molec_x]
-                                        filtro_tanimoto.append(name)
-                                        res = rdFMCS.FindMCS(mols)
-                                        tamanio_MCS = res.numAtoms
-                                        if tamanio_MCS/tamanio_molec < lim_fraction_MCS:
-                                            filtro_MCS.append(name)
-                                            if framework_filter == True:
-                                                if framework != framework_DB:
-                                                    if not smiles_DB in smiles_seleccionados:
-                                                        smiles_by_active.append(smiles_DB)
-                                                        fp_seleccionados_por_activo.append(fp_2)
-                                                    filtro_fw.append(name)
-                                                    fp_seleccionados.append(fp_2)
-                                                    smiles_seleccionados.append(smiles_DB)
-                                                else:
-                                                    pass
-                                            if framework_filter == False:
-                                                if not smiles_DB in smiles_seleccionados:
-                                                    smiles_by_active.append(smiles_DB)
-                                                    fp_seleccionados_por_activo.append(fp_2)
-                                                filtro_fw.append(name)
-                                                fp_seleccionados.append(fp_2)
-                                                smiles_seleccionados.append(smiles_DB)
-                                        
-        base_de_datos.close()
+            base_de_datos = pd.read_csv("databases/" + base_de_datos, sep=",",index_col=False, header=None) #abro la base de datos para comparar
+            #BASE DE DATOS
+            base_de_datos_1 = base_de_datos[
+                pd.to_numeric((MinWt_DB <= base_de_datos[3]) & (base_de_datos[3] <= MaxWt_DB)) &
+                pd.to_numeric((MinMolLogP_DB <= base_de_datos[4]) & (base_de_datos[4] <= MaxMolLogP_DB)) &
+                pd.to_numeric((MinNumRotatableBonds_DB <= base_de_datos[5]) & (base_de_datos[5] <= MaxNumRotatableBonds_DB)) &
+                pd.to_numeric((MinNumHAcceptors_DB <= base_de_datos[6]) & (base_de_datos[6]<= MaxNumHAcceptors_DB)) &
+                pd.to_numeric((MinNumHDonors_DB <= base_de_datos[7]) &  (base_de_datos[7]<= MaxNumHDonors_DB))]
+            
+            if len(base_de_datos_1) >= 1000:
+                base_de_datos_1 = base_de_datos_1.sample(1000, replace=False, random_state=1)
+            print(len(base_de_datos_1))
+        
+            base_de_datos_1['mol'] = base_de_datos_1[1].apply(lambda x: Chem.MolFromSmiles(x))    
+           
+            
+            conteo_final.append(len(base_de_datos_1))
+            conteo_1.append(len(base_de_datos_1))
+            for index, columna in base_de_datos_1.iterrows():
+                # Dissimilarity conditions                 
+                smiles_DB = columna[1]
+                # molec_x = Chem.MolFromSmiles(smiles_DB)
+                fp_2 = AllChem.GetMorganFingerprintAsBitVect(columna["mol"],fingerprint_radio,nBits = fingerprint_lenght,useFeatures=False)
+                similarity_metric_ok = getattr(DataStructs, similarity_metric)
+                tan_sim= similarity_metric_ok(fp_1, fp_2)
+                if tan_sim <= float(max_similarity_limit):
+                    mols = [my_smiles,columna["mol"]]
+                    filtro_tanimoto.append(columna[0])
+                    res = rdFMCS.FindMCS(mols)
+                    tamanio_MCS = res.numAtoms
+                    if tamanio_MCS/tamanio_molec < lim_fraction_MCS:
+                        filtro_MCS.append(columna[0])
+                        framework_DB = columna[2]     
+                        if framework_filter == True:
+                            if framework != framework_DB:
+                                if not smiles_DB in smiles_seleccionados:
+                                    smiles_by_active.append(smiles_DB)
+                                    fp_seleccionados_por_activo.append(fp_2)
+                                filtro_fw.append(columna[0])
+                                fp_seleccionados.append(fp_2)
+                                smiles_seleccionados.append(smiles_DB)
+                            else:
+                                pass
+                        if framework_filter == False:
+                            if not smiles_DB in smiles_seleccionados:
+                                smiles_by_active.append(smiles_DB)
+                                fp_seleccionados_por_activo.append(fp_2)
+                            filtro_fw.append(columna[0])
+                            fp_seleccionados.append(fp_2)
+                            smiles_seleccionados.append(smiles_DB)
+            del base_de_datos
+         
+        # base_de_datos.close()
         OK = [str(nombre), str(len(conteo_1)),str(len(filtro_tanimoto)),str(len(filtro_MCS)),str(len(filtro_fw))]
         analisis.append(OK)
         smiles_x_activo_final.append(smiles_by_active)
         fp_seleccionados_x_activo_final.append(fp_seleccionados_por_activo)
-        del base_de_datos
         gc.collect()
     OK1 = pd.DataFrame(analisis)
     OK2= OK1.rename(columns={0:"Query",1:"selected by physicochemical properties",2:"pass the Tc filter",3:"pass the fMCS filter",4:"Obtained decoys"})
@@ -503,7 +505,6 @@ text-align: center;
 </div>
 """
 st.markdown(footer,unsafe_allow_html=True)
-
 
 
 
