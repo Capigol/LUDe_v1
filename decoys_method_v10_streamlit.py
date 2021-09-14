@@ -22,6 +22,7 @@ from molvs import standardize_smiles
 import random
 from time import process_time
 import os
+import time
 
 #---------------------------------#
 # Page layout
@@ -431,10 +432,13 @@ if uploaded_file_1 is not None:
     st.subheader(':point_down: Click RUN to generate decoys')
     run = st.button("RUN")
     if run == True:
+        time_start = time.time()
         loaded_smiles = pd.read_csv(uploaded_file_1,sep="\t",header=None)
         lista_resultados = decoy_fase1(loaded_smiles)
         st.write("Now, we are comparing all decoys vs all input SMILES, please wait a moment...")
-        df = duplicates_filter(lista_resultados[0])
+        df = duplicates_filter(lista_resultados[0])   
+        st.write(f'La primera etapa tardó {round(time.time()-time_start)} segundos')
+
         st.markdown(":point_down: **Here you can dowload the generated decoys**", unsafe_allow_html=True)
         st.markdown(filedownload(df), unsafe_allow_html=True)
         st.markdown(text)
