@@ -253,6 +253,7 @@ def decoy_fase1(loaded_smiles):
         #BASE DE DATOS        
         for base_de_datos in base_de_datos_total:
             base_de_datos = pd.read_csv("databases/" + base_de_datos, sep=",",index_col=False, header=None) #abro la base de datos para comparar
+            st.write(len(base_de_datos))
             #BASE DE DATOS
             base_de_datos_1 = base_de_datos[
                 pd.to_numeric((MinWt_DB <= base_de_datos[3]) & (base_de_datos[3] <= MaxWt_DB)) &
