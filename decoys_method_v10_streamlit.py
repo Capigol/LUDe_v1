@@ -217,6 +217,8 @@ def decoy_fase1(loaded_smiles):
             st.markdown("**Oh no! There is a problem with standarization of one SMILES.** :confused:")
             st.markdown("**Please check your molecule: **" + str(i+1))
             st.markdown("**That is the SMILES: **" + str(molecula_ok))
+            st.markdown(" :point_down: **Try using our standarization tool to fix the SMILES**")
+            st.write("[LISTo](https://share.streamlit.io/cbellera/listo/main/LISTo_v1.py)") 
             st.stop()
         i = i + 1
         nombre= "Query_" + str(i)
