@@ -91,6 +91,8 @@ st.image(image, caption='LUDe Workflow')
 
 st.markdown(text)
 
+st.subheader(":rocket:" "**Fast Tutorial** " "[LUDe](https://www.youtube.com/watch?v=brsC0CPS9U0&ab_channel=LIDeBUNLP)")
+st.markdown(" ")
 
 # OPTIONS
 
