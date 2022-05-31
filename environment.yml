@@ -15,3 +15,4 @@ dependencies:
         - molvs
         - streamlit==0.82.0
         - streamlit_tags
+        - protobuf~=3.19.0
